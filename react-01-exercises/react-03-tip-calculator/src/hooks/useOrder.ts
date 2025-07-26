@@ -4,6 +4,7 @@ import { IMenuItem, IOrdenItem } from "../interfaces";
 
 export default function useOrder() {
   const [order, setOrder] = useState<IOrdenItem[]>([]);
+  const [tip, setTip] = useState(0);
 
   const addItem = (item: IMenuItem) => {
     const itemExist = order.find((orderItem) => orderItem.id === item.id);
@@ -26,9 +27,17 @@ export default function useOrder() {
     setOrder(order.filter((item) => item.id !== id));
   };
 
+  const placeOrder = () => {
+    setOrder([]);
+    setTip(0);
+  };
+
   return {
     order,
+    tip,
+    setTip,
     addItem,
     removeItem,
+    placeOrder,
   };
 }
